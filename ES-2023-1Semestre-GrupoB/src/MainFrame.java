@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.Desktop;
 import java.awt.event.ActionListener;
@@ -112,13 +113,24 @@ public class MainFrame extends JFrame {
 	
 	public void escolha(int resultado, JFileChooser localfile) {
 		
+		   File file = localfile.getSelectedFile();
+		   try {
+			FileChecker check = new FileChecker(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if(resultado == JFileChooser.APPROVE_OPTION) {
 			
 			sucesso.setText("Ficheiro carregado com sucesso");
 			sucesso.setBounds(53, 313, 269, 36);
 			contentPane.add(sucesso);
 			file_path =new File(localfile.getSelectedFile().getAbsolutePath());
+		
+			
 			System.out.println(file_path);
+			//FileChecker check = new FileChecker(file_path);
 		}else if(resultado == JFileChooser.CANCEL_OPTION) {
 			
 			erro.setText("Ficheiro não carregado, tente novamente");
@@ -138,9 +150,10 @@ public class MainFrame extends JFrame {
 		
 		public void checkURL() {
 			
-			
+		
 			
 		}
+		
 		
 		 public void download(String texto) throws IOException {
 			URL url= new URL(texto);

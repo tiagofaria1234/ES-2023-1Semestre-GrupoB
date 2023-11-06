@@ -6,21 +6,23 @@ import java.util.Scanner;
 public class FileChecker {
 
 	File file;
-	String linha;
-	Scanner scanner;
+	 private Scanner scanner;
 
 	public FileChecker(File file) throws FileNotFoundException {
 
 		this.file = file;
-		this.scanner = new Scanner(file);
+		checkRows(file);
 
 	}
 
-	public boolean checkRows(String row) {
-
-		linha = scanner.nextLine();
+	public boolean checkRows(File file) throws FileNotFoundException {
+		
+		scanner = new Scanner(file);
+		
+		
+		if(scanner.hasNextLine()) {
+		String linha = scanner.nextLine();
 		String[] colunas = linha.split(";");
-
 		String coluna1 = colunas[0];
 		String coluna2 = colunas[1];
 		String coluna3 = colunas[2];
@@ -32,17 +34,24 @@ public class FileChecker {
 		String coluna9 = colunas[8];
 		String coluna10 = colunas[9];
 		String coluna11 = colunas[10];
-
+		
 		if (coluna1.equals("Curso") && coluna2.equals("Unidade Curricular") && coluna3.equals("Turno")
 				&& coluna4.equals("Turma") && coluna5.equals("Inscritos no turno") && coluna6.equals("Dia da semana")
 				&& coluna7.equals("Hora início da aula") && coluna8.equals("Hora fim da aula")
 				&& coluna9.equals("Data da aula") && coluna10.equals("Características da sala pedida para a aula")
 				&& coluna11.equals("Sala atribuída à aula")) {
+			System.out.println("funcionou!");
 			return true;
-		} else {
-
-			return false;
+			
+			
+		
 		}
-	}
+		}
+		System.out.println("errou");
+		return false;
+		}
+		
+
+	
 
 }
